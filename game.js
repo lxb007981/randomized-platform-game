@@ -300,7 +300,7 @@ var currentSeedNodeSet = null;
 var startAgainFlag = false;
 var playEndingMusicTimeout = null;
 
-var seed = new Date().toLocaleTimeString();
+var seed = Math.floor(Math.random()*10000000000000).toString();
 
 function setSeedAndStart(evt) {
     while (true) {
@@ -365,8 +365,10 @@ function startAgainWithSeed() {
     Math.seedrandom(seed);
     startAgain();
 }
-function startAgain() {
+function startAgain(randomStart) {
     clearTimeout(playEndingMusicTimeout);
+    endingMusic.pause();
+    endingMusic.currentTime = 0;
     startAgainFlag = true;
     let highScoreScreen = document.getElementById("highscoretable");
     highScoreScreen.style.setProperty("visibility", "hidden", null);
@@ -379,6 +381,10 @@ function startAgain() {
     }
     let loadingScreen = svgdoc.getElementById("loadingScreen");
     loadingScreen.setAttribute("style", "visibility: visible");
+    if(randomStart){
+        Math.seedrandom(new Date().toLocaleTimeString());
+        seed = Math.random().toString();
+    }
     Math.seedrandom(seed);
     regeneratePlatforms();
     loadGameFinish();
@@ -1182,7 +1188,7 @@ function collisionDetection() {
         }
     }
 
-    if (!cheatEnabled && !monsterBullet&&monsterBullet.exsistence) {
+    if (!cheatEnabled && monsterBullet!=null&&monsterBullet.exsistence) {
         let monsterBulletNode = monsterBullet.node;
         let monsterBulletX = parseInt(monsterBulletNode.getAttribute("x"));
         let monsterBulletY = parseInt(monsterBulletNode.getAttribute("y"));
