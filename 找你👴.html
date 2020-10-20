@@ -1,0 +1,48 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<head>
+    <title>
+        找你👴
+    </title>
+    <script>
+        var the_timer; var target_layer; var timeout;
+        function set_timer() {
+            timeout = false;
+            target_layer = document.getElementById("target"); // Find the layer
+            target_layer.style.left = Math.floor(Math.random() * 1000);
+            target_layer.style.top = Math.floor(Math.random() * 1000);
+            the_timer = setTimeout("show_message()", 2000);
+        }
+        function reset_timer() {
+            clearTimeout(the_timer);
+            if (!timeout) {
+                alert("you are the fastest man in the west!")
+            }
+            else {
+                alert("超时了哥，快按F5重来吧");
+            }
+        }
+        function show_message() {
+            alert("Too slow! Are you a snail?");
+            alert("按F5重来吧哥");
+            timeout = true;
+        }
+    </script>
+</head>
+
+<body
+    style="background-image: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599762890716&di=e5d5a8d9d07dea76bae44009a099d3f4&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ftech%2Fcrawl%2F20160415%2FUd4x-fxriqri6342398.jpg');"
+    onload="set_timer()">
+    <script>
+        alert("你能在两秒内找到你👴吗");
+        alert("点击开始游戏！");
+    </script>
+
+    <div id="target" onclick="reset_timer()" style="position:absolute;">
+        <img src="https://pqlb2g.dm.files.1drv.com/y4mx_YYkOoS1Y5U2OFXUZUeWRDoCd0SeENlgdK68nN4RdWx0bZpgMNNS8fav223mMOCSlh5Dw7hNSV9eCGU9LWDyt-tsnZeEQMo3CwCaKTRJQfzD7I5l06h0wQE6gwPp8XqHecMt3neJrWfTQbcaLcnFGijxzrHBkVWBH-dvL7wn7ehXxaXCp3vT9c5YjduHrQcjUYInWfpo8Relx-90penwA?width=375&height=375&cropmode=none"
+            width="40" height="40" />
+    </div>
+</body>
+
+</html>
