@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>SVG Game</title>
+  <script language="JavaScript" src="game.js"></script>
+  <script language="JavaScript" src="highscore.js"></script>
+  <script language="JavaScript" src="seedrandom.js"></script>
+</head>
+
+<body style="text-align: center">
+  <svg width="800px" height="600px" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:a="http://www.adobe.com/svg10-extensions" a:timeline="independent" xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+
+    <defs id="defs860">
+      <linearGradient id="linearGradient873" osb:paint="solid">
+        <stop style="stop-color:#000000;stop-opacity:1;" offset="0" id="stop871" />
+      </linearGradient>
+      <clipPath id="gameareaclip">
+        <rect x="20" y="20" width="600" height="560" id="rect837" />
+      </clipPath>
+      <pattern id="background_pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <rect width="20" height="20" style="fill:yellow" id="rect840" />
+        <circle cx="10" cy="10" r="8" style="fill:lightyellow" id="circle842" />
+      </pattern>
+      <radialGradient id="player_color">
+        <stop offset="0.0" style="stop-color:yellow;stop-opacity:1" id="stop845" />
+        <stop offset="0.8" style="stop-color:yellow;stop-opacity:1" id="stop847" />
+        <stop offset="1.0" style="stop-color:orange;stop-opacity:1" id="stop849" />
+      </radialGradient>
+      <linearGradient id="linearGradient881" osb:paint="solid">
+        <stop style="stop-color:#000000;stop-opacity:1;" offset="0" id="stop879" />
+      </linearGradient>
+      <linearGradient id="linearGradient875" osb:paint="solid">
+        <stop style="stop-color:#9bcb00;stop-opacity:1;" offset="0" id="stop873" />
+      </linearGradient>
+      <linearGradient inkscape:collect="always" xlink:href="#linearGradient875" id="linearGradient876" x1="1.4325"
+        y1="34.936417" x2="43.765827" y2="34.936417" gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(1.0174079,0,0,1.0174079,-0.96139356,-0.96139039)" />
+      <linearGradient inkscape:collect="always" xlink:href="#linearGradient873" id="linearGradient876-3" x1="1.4325"
+        y1="34.936417" x2="43.765827" y2="34.936417" gradientUnits="userSpaceOnUse"
+        gradientTransform="matrix(1.0174079,0,0,1.0174079,44.660885,-0.43579871)" />
+      <filter inkscape:collect="always" style="color-interpolation-filters:sRGB" id="filter1577" x="-0.056254108"
+        width="1.1125082" y="-0.036489151" height="1.0729783">
+        <feGaussianBlur inkscape:collect="always" stdDeviation="1.701017" id="feGaussianBlur1579" />
+      </filter>
+      <filter inkscape:collect="always" style="color-interpolation-filters:sRGB" id="filter1581" x="-0.016673533"
+        width="1.0333471" y="-0.0076644449" height="1.0153289">
+        <feGaussianBlur inkscape:collect="always" stdDeviation="0.29935437" id="feGaussianBlur1583" />
+      </filter>
+    </defs>
+    <defs>
+      <g id="monster1">
+        <path d="M0,30 q0,-30 20,-30 t20,30 l0,10 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l-5,-7 l-5,7 l0,-10"
+          style="fill:gray;fill-opacity:0.5;stroke:black;stroke-width:2" />
+        <circle cx="12" cy="20" r="5" style="fill:yellow;stroke:black;stroke-width:2">
+          <animate attributeName="fill" values="yellow;red;yellow" dur="1s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="28" cy="20" r="5" style="fill:yellow;stroke:black;stroke-width:2">
+          <animate attributeName="fill" values="yellow;red;yellow" dur="1s" repeatCount="indefinite" />
+        </circle>
+      </g>
+      <g id="monster">
+        <animateTransform type="rotate" attributeName="transform" attributeType="XML" dur="2s" values="0;10;0"
+          repeatCount="indefinite" />
+        <text xml:space="preserve"
+          style="font-style:normal;font-weight:normal;font-size:41.3538px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264584"
+          x="-0.60576725" y="34.104733" id="text12" transform="scale(0.99345976,1.0065833)">
+          <tspan sodipodi:role="line" id="tspan10" x="-0.60576725" y="34.104733" style="stroke-width:0.264584">獸</tspan>
+        </text>
+        <text xml:space="preserve" id="text14"
+          style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.58333333px;white-space:pre;shape-inside:url(#rect16);" />
+      </g>
+      <g id="monsterKing">
+        <animateTransform type="rotate" attributeName="transform" attributeType="XML" dur="2s" values="0;10;0"
+          repeatCount="indefinite" />
+        <text xml:space="preserve"
+          style="font-style:normal;font-weight:normal;font-size:34.0161px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264584"
+          x="0.94016296" y="45.977947" id="text12" transform="scale(1.2077623,0.82797746)">
+          <tspan sodipodi:role="line" id="tspan10" x="0.94016296" y="45.977947" style="stroke-width:0.264584">獸</tspan>
+        </text>
+        <text xml:space="preserve" id="text14"
+          style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.58333333px;white-space:pre;shape-inside:url(#rect16);" />
+        <path style="fill:#ffa413;stroke-width:0.264583"
+          d="M 5.7844004,10.631674 C 4.0328046,8.5552059 2.414158,6.640682 2.1874081,6.377177 1.9606582,6.1136713 3.9620987,6.7245252 6.6350537,7.7346286 9.3080083,8.7447333 11.715732,9.571183 11.98555,9.571183 c 0.269818,0 1.735843,-1.7247646 3.257833,-3.8328073 1.521989,-2.1080434 2.956981,-3.8328046 3.188869,-3.8328046 0.231891,0 2.040648,1.4732342 4.019466,3.2738533 1.978816,1.8006205 3.879606,3.3969195 4.223976,3.5473287 0.344369,0.150412 2.581612,-0.7431795 4.971651,-1.9857579 2.390037,-1.2425792 4.502384,-2.1982042 4.694109,-2.1236108 0.191722,0.074593 -0.513018,2.1410673 -1.566088,4.5921665 l -1.914677,4.4565441 -7.422879,0.197526 c -4.082585,0.108638 -9.458185,0.275359 -11.945785,0.370488 l -4.5229047,0.172962 z"
+          id="path72" />
+      </g>
+      <g id="goodThing">
+        <path id="heart" fill="#ff0000"
+          d="m 0,7.5 a 7.5,7.5 0 0 1 15,0 7.5,7.5 0 0 1 15,0 Q 30,18.75 15,30 0,18.75 0,7.5 Z"
+          style="stroke-width:0.999998" />
+      </g>
+      <g id="bullet">
+        <circle cx="5" cy="5" r="5" style="fill:red" />
+        <circle cx="6" cy="3" r="1" style="fill:pink" />
+      </g>
+      <g id="portal">
+        <rect style="opacity:1;fill:#ffe400;fill-opacity:1;stroke-width:0.556721;filter:url(#filter1577)" id="rect947"
+          width="72.571426" height="111.88095" x="35.529762" y="79.375"
+          transform="matrix(0.41824838,0,0,0.5400259,-13.152791,-40.659932)" />
+        <rect style="opacity:1;fill:#000000;fill-opacity:0.786611;stroke-width:0.517296;filter:url(#filter1581)"
+          id="rect1133" width="43.089275" height="93.738098" x="17.271471" y="15.875288"
+          transform="scale(0.48443015,0.5400259)" />
+        <ellipse
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          id="path1285" cx="18.071287" cy="19.962791" rx="0.18310302" ry="0.61235082" />
+        <ellipse
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          id="path1285-4" cx="20.817827" cy="32.413929" rx="0.18310302" ry="0.2041169" />
+        <ellipse
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          id="path1285-5" cx="16.240252" cy="38.945679" rx="0.36620608" ry="1.4288185" />
+        <path id="path1285-41"
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          d="m 23.198173,45.96729 a 1.2817214,0.4082327 0 0 0 -1.281721,-0.408232 1.2817214,0.4082327 0 0 0 -1.281722,0.408232 1.2817214,0.4082327 0 0 0 1.281722,0.408234 1.2817214,0.4082327 0 0 0 1.281721,-0.408234 z" />
+        <ellipse
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          id="path1285-9" cx="24.333416" cy="26.494532" rx="0.73241222" ry="1.2247016" />
+      </g>
+      <g id="closedGate">
+        <rect
+          style="fill:#7c5b31;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient876);stroke-width:0.992093;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+          id="rect871" width="43.070263" height="68.174301" x="0.49604639" y="0.49604639" />
+        <ellipse
+          style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#c99750;fill-opacity:1;fill-rule:evenodd;stroke-width:0.269189;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;stop-color:#000000;stop-opacity:1"
+          id="path2871" cx="6.6165462" cy="35.260429" rx="2.946913" ry="3.1603982" />
+      </g>
+      <g id="openGate">
+        <rect
+          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:url(#linearGradient876);stroke-width:0.992093;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+          id="rect871" width="43.070263" height="68.174301" x="0.49604651" y="0.49604651" />
+        <path sodipodi:type="spiral"
+          style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f9cd5d;stroke-width:1.23675;stroke-opacity:1"
+          id="path913" sodipodi:cx="93.831551" sodipodi:cy="41.098145" sodipodi:expansion="2.99"
+          sodipodi:revolution="10.7" sodipodi:radius="18.973824" sodipodi:argument="-18.064157"
+          sodipodi:t0="0.0099999998"
+          d="m 93.831553,41.098164 c -3.3e-5,3.07e-4 -5.97e-4,1.39e-4 -7.27e-4,6.3e-5 -0.0013,-7.88e-4 -4.94e-4,-0.0028 3.22e-4,-0.0036 0.0031,-0.0031 0.0082,-5.72e-4 0.01034,0.0024 0.0056,0.0079 -1.33e-4,0.01827 -0.0075,0.02248 -0.01575,0.009 -0.03454,-0.0021 -0.04168,-0.0169 -0.01332,-0.02755 0.0059,-0.05853 0.03186,-0.06955 0.04407,-0.01869 0.09177,0.01191 0.107683,0.0537 0.02518,0.0661 -0.0207,0.135763 -0.08367,0.1577 -0.0944,0.03289 -0.192037,-0.03275 -0.221201,-0.123072 -0.0419,-0.129783 0.04855,-0.262103 0.173171,-0.299788 0.173016,-0.05232 0.347473,0.06858 0.395063,0.235247 0.06422,0.224884 -0.09335,0.449657 -0.310572,0.508624 -0.286171,0.07769 -0.570165,-0.123348 -0.64207,-0.400421 -0.09282,-0.357655 0.159054,-0.710505 0.506065,-0.796996 0.440121,-0.109699 0.872183,0.200964 0.974998,0.628774 0.128419,0.534346 -0.249566,1.056707 -0.769819,1.177672 -0.64111,0.149064 -1.26558,-0.305352 -1.406607,-0.930469 -0.171726,-0.761192 0.368808,-1.500308 1.111991,-1.663399 0.895371,-0.196489 1.762391,0.440424 1.949637,1.315654 0.223444,1.044425 -0.52069,2.053334 -1.542723,2.266912 -1.209132,0.252677 -2.374637,-0.610092 -2.616814,-1.794465 -0.284278,-1.390269 0.709119,-2.727802 2.072145,-3.000931 1.588613,-0.318334 3.114327,0.818258 3.420851,2.377027 0.354933,1.80494 -0.937997,3.535713 -2.710376,3.878162 -2.040028,0.394163 -3.993458,-1.068822 -4.37445,-3.073455 -0.436112,-2.294651 1.211222,-4.48906 3.467527,-4.911302 2.569585,-0.480868 5.024017,1.365683 5.490302,3.893856 0.528518,2.865606 -1.532691,5.599825 -4.353701,6.113034 -3.183489,0.579152 -6.217981,-1.712732 -6.781084,-4.848325 -0.632856,-3.524008 1.906293,-6.87998 5.378989,-7.496035 3.887937,-0.689718 7.587319,2.11386 8.259469,5.946954 0.74983,4.276052 -2.335918,8.341489 -6.553479,9.072971 -4.689126,0.813268 -9.143987,-2.572955 -9.93812,-7.199826 -0.880132,-5.127932 2.825454,-9.996307 7.887251,-10.856499 5.593246,-0.950505 10.899938,3.093901 11.829688,8.617014 1.02448,6.085839 -3.37878,11.856385 -9.390374,12.859272 -6.606484,1.10213 -12.867127,-3.680582 -13.946825,-10.208591 -1.183556,-7.155955 3.999785,-13.933662 11.07292,-15.09393 7.735019,-1.268843 15.057479,4.336877 16.302169,11.984619 1.35807,8.344463 -4.69234,16.240075 -12.94495,17.573111 -8.985045,1.451347 -17.482934,-5.066664 -18.908344,-13.955158 -1.548738,-9.657542 5.460328,-18.78755 15.01651,-20.309443 3.615454,-0.575788 7.369059,-0.05367 10.700064,1.461085"
+          transform="matrix(0,1.146609,-1.146609,0,67.824382,-72.775512)" />
+      </g>
+
+    </defs>
+    <g id="welcomeScreen">
+      <text x="400" y="300" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+        Game Title!
+      </text>
+      <!--
+        <text x="100" y="400" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+
+        <tspan x="380" dy="1.2em">gg</tspan>
+        <tspan x="380" dy="1.2em">Introduction!Game Introduction!Game Introduction!Gam</tspan>
+        <tspan x="380" dy="1.2em">Introduction!Game Introduction!Game Introduction!Game</tspan>
+        <tspan x="380" dy="1.2em">Introduction!Game Introduction!Game Introduction</tspan>
+      </text>
+    -->
+
+    <g id="startButton" onclick="welcomeScreenLoad(evt);" onmouseover="" style="cursor: pointer;">
+      <rect x="300" y="540" width="100" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+      <text x="326" y="572">START</text>
+    </g>
+    <g  onclick="setSeedAndStart(evt);" onmouseover="" style="cursor: pointer;">
+      <rect x="420" y="540" width="200" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+      <text x="446" y="572">START WITH SEED</text>
+    </g>
+</g>
+    <foreignObject>
+      <audio controls loop id="welcomeMusic" xmlns="http://www.w3.org/1999/xhtml">
+        <source src="sound/welcomeScreen.mp3" type="audio/mp3" />
+      </audio>
+    </foreignObject>
+    <g id="introductionScreen" style="visibility: hidden">
+
+      <foreignObject x="50" y="50" width="700" height="800">
+
+        <body xmlns="http://www.w3.org/1999/xhtml">
+          <p style="color:orange;font-size:25px;font-weight:bold;text-anchor:middle">Nightfall
+            If the stars should appear one night in a thousand years, how would men believe and adore, and preserve for
+            many generations the remembrance of the city of God?"
+            —— EMERSON
+            Aton 77, director of Saro University, thrust out a belligerent lower lip and glared at the young
+            newspaperman in a hot fury.
+            Theremon 762 took that fury in his stride. In his earlier days, when his now widely syndicated column was
+            only a mad idea in a cub reporter's mind, he had specialized in 'impossible' interviews. It had cost him
+            bruises, black eyes, and broken bones; but it had given him an ample supply of coolness and self-confidence.
+            So he lowered the outthrust hand that had been so pointedly ignored and calmly waited for the aged director
+            to get over the worst. Astronomers were queer ducks, anyway, and if Aton's actions of the last two months
+            meant anything; this same Aton was the queer-duckiest of the lot.
+          </p>
+        </body>
+      </foreignObject>
+      <g id="startButton" onclick="introductionScreenLoad(evt);" onmouseover="" style="cursor: pointer;">
+        <rect x="300" y="540" width="100" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+        <text x="326" y="572">START</text>
+      </g>
+    </g>
+    <g id="loadingScreen" style="visibility: hidden">
+      <text x="400" y="300" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+        少女祈祷中...
+      </text>
+    </g>
+    <g id="gameScreen" style="visibility: hidden">
+      <foreignObject>
+        <audio controls loop id="gameMusic" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/mainTheme.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="shootSound" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/shoot.wav" type="audio/wav" />
+        </audio>
+        <audio id="goodThingSound" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/goodThing.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="gateOpenSound" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/gateOpen.wav" type="audio/wav" />
+        </audio>
+        <audio id="gameOverSound" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/gameOver.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="monsterHitSound" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/monsterHit.wav" type="audio/wav" />
+        </audio>
+        <audio controls loop id="endingMusic" xmlns="http://www.w3.org/1999/xhtml">
+          <source src="sound/celebrate.ogg" type="audio/ogg" />
+        </audio>
+      </foreignObject>
+
+      <rect width="100%" height="100%" style="fill:url(#background_pattern);stroke:orange;stroke-width:4" />
+
+      <rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
+
+
+      <!--add your score element here-->
+      <g transform="translate(640, 120)">
+        <text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+          Score:
+        </text>
+        <rect x="0" y="10" width="140" height="35" style="fill:white" />
+        <text id="score" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">0</text>
+      </g>
+      <g transform="translate(640, 220)">
+        <text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+          Bullets:
+        </text>
+        <rect x="0" y="10" width="140" height="35" style="fill:white" />
+        <g id="remainingBullets">
+          <use xlink:href="#bullet" x="30" y="20" />
+          <use xlink:href="#bullet" x="40" y="20" />
+          <use xlink:href="#bullet" x="50" y="20" />
+          <use xlink:href="#bullet" x="60" y="20" />
+          <use xlink:href="#bullet" x="70" y="20" />
+          <use xlink:href="#bullet" x="80" y="20" />
+          <use xlink:href="#bullet" x="90" y="20" />
+          <use xlink:href="#bullet" x="100" y="20" />
+        </g>
+      </g>
+      <g transform="translate(640, 320)">
+        <text x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+          Time:
+        </text>
+        <rect x="0" y="10" width="140" height="35" style="fill:white" />
+        <text id="remainingTime" x="70" y="36" style="fill:orange;font-size:25px;text-anchor:middle">120</text>
+      </g>
+      <g transform="translate(640, 420)">
+        <text id="currentLevel" x="70" y="0" style="fill:orange;font-size:25px;font-weight:bold;text-anchor:middle">
+          Level:0
+        </text>
+      </g>
+      <g transform="translate(640, 470)">
+        <text id="currentSeed" x="70" y="0" style="fill:orange;font-size:7px;font-weight:bold;text-anchor:middle">
+          
+        </text>
+      </g>
+
+
+      <g style="clip-path:url(#gameareaclip)">
+        <g transform="translate(20,20)">
+          <g id="gamearea" transform="translate(0,0)" width="600" height="560">
+            <rect x="0" y="0" width="600" height="560" style="fill:white" />
+
+            <g id="platforms">
+            </g>
+            <g id="gates" />
+            <g id="monsters" /> 
+            <g id="portals" />
+            <g id="goodThings" />
+            <g id="bullets" />
+            <g id="nameBox">
+              <text text-anchor="middle">abaaba</text>
+            </g>
+            <!--<g id="player1">
+              <circle cx="20" cy="20" r="20" style="fill:url(#player_color);stroke:black;stroke-width:2" />
+              <ellipse cx="15" cy="15" rx="3" ry="6" style="fill:black" />
+              <ellipse cx="25" cy="15" rx="3" ry="6" style="fill:black" />
+              <path d="M10,25 l20,0 q0,8 -10,8 t-10,-8" style="fill:orange;stroke:black;stroke-black:2" />
+            </g>
+            <-->
+            <g id="player">
+              <ellipse style="fill:#0000ff;fill-rule:evenodd;stroke-width:0.0331226" id="path10" cx="16.466312"
+                cy="15.930566" rx="16.466312" ry="15.930566" />
+              <path style="fill:#0000ff;stroke-width:0.0946357"
+                d="M 12.387134,31.11183 C 7.9412123,30.035947 3.7585238,26.631475 1.6908056,22.405654 0.59455126,20.165212 0.53694248,19.841929 0.53694248,15.93058 c 0,-3.917815 0.0562277,-4.231796 1.16284212,-6.4938684 C 4.0064666,4.7215988 8.5675077,1.3612565 13.871076,0.46960981 20.886164,-0.70981124 28.089013,3.0103812 31.23284,9.4367116 c 1.106611,2.2620724 1.162838,2.5760534 1.162838,6.4938684 0,3.917853 -0.05623,4.231833 -1.162838,6.493868 -3.40669,6.963686 -11.173496,10.543962 -18.845706,8.687382 z"
+                id="path12" />
+              <path style="fill:#cccccc;stroke-width:0.0946357"
+                d="M 12.886675,31.289108 C 8.4649092,30.425483 3.7810792,26.708051 1.7175686,22.424448 0.73439396,20.383481 0.55221023,19.566709 0.42883096,16.646575 0.31062418,13.848924 0.41937096,12.864668 1.0408689,11.09771 2.5985232,6.6706366 6.2004888,2.963944 10.651901,1.2072727 c 2.949399,-1.16391683 8.67942,-1.16391683 11.628815,0 2.954398,1.1658831 6.077134,3.6541671 7.772705,6.1935015 2.029399,3.0392908 2.63553,5.3630778 2.457959,9.4234568 -0.123353,2.821096 -0.31069,3.634389 -1.29976,5.643629 -1.343773,2.72981 -4.217352,5.76687 -6.772181,7.157489 -3.275788,1.783067 -7.688329,2.418515 -11.552764,1.663759 z"
+                id="path14" />
+              <rect style="fill:#333333;stroke-width:0.0331226" id="rect16" width="11.096862" height="7.8757839"
+                x="21.477808" y="11.097714" />
+              <path
+                style="fill:none;stroke:#000000;stroke-width:0.0331226px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                d="m 24.341506,43.316827 h 15.392419 c 1.556592,-4.264089 -4.481158,-5.273228 -9.307044,-6.801797 -1.913296,-1.773348 -4.291425,-1.687167 -7.159267,0.35811 z"
+                id="path37" />
+              <path
+                style="fill:none;stroke:#000000;stroke-width:0.0331226px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                d="m 3.579632,43.674825 c 4.1762408,-18.065006 8.352474,-8.843861 12.528715,0 z" id="path39" />
+              <path style="fill:#999999;stroke-width:0.0946357"
+                d="m 6.9083673,43.587018 c 1.732365,-0.0658 4.4707817,-0.06542 6.0853747,9.45e-4 1.614597,0.06618 0.197213,0.119875 -3.1497525,0.119496 -3.3469545,-3.78e-4 -4.6679872,-0.05445 -2.9356222,-0.120252 z"
+                id="path41" />
+              <path style="fill:#999999;stroke-width:0.0946357"
+                d="m 4.1534986,42.511362 c 0.7458946,-3.19906 2.148393,-6.664529 3.1803866,-7.858433 1.0677886,-1.235349 1.2319765,-1.307236 2.0912535,-0.915697 1.2217183,0.556679 2.8028743,2.761272 4.7524003,6.626184 l 1.580028,3.132429 H 9.8407619 3.9239527 Z"
+                id="path43" />
+              <path style="fill:#999999;stroke-width:0.0946357"
+                d="m 4.2955586,43.023835 c 0,-1.726609 2.5909117,-7.866563 3.7122263,-8.797235 1.2879469,-1.069 2.9314671,0.576683 5.7181281,5.72565 0.916579,1.693558 1.666511,3.183707 1.666511,3.311409 0,0.127816 -2.496796,0.232186 -5.5484345,0.232186 -4.3538386,0 -5.5484309,-0.101723 -5.5484309,-0.47201 z"
+                id="path45" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 24.534946,42.690379 c -0.170991,-0.538678 -0.909371,-5.014118 -0.909371,-5.51188 0,-0.529263 2.38142,-1.558443 3.606041,-1.558443 0.591798,0 1.673648,0.299497 2.404108,0.665889 0.730453,0.36643 2.777848,1.12024 4.549769,1.675557 3.610177,1.131433 5.548432,2.614549 5.548432,4.24556 v 0.930786 h -7.528467 c -5.708366,0 -7.562801,-0.108152 -7.670512,-0.447469 z"
+                id="path47" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 4.4636627,42.153364 c 0.3651016,-1.978231 1.9445507,-5.826541 2.938532,-7.159794 1.1562393,-1.550919 1.9687596,-1.466591 3.4502223,0.35811 1.123404,1.383586 4.540007,7.332687 4.540007,7.90521 0,0.131597 -2.514724,0.238993 -5.5882706,0.238993 H 4.2158826 Z"
+                id="path49" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 4.6712586,42.162327 c 0.1778778,-0.791815 0.4928096,-1.885168 0.6998152,-2.42967 0.2069754,-0.544503 0.3010413,-1.065371 0.2089051,-1.157489 -0.092136,-0.09227 -0.00378,-0.351682 0.1959266,-0.576834 0.1998618,-0.225001 0.7137018,-1.038256 1.1418646,-1.806965 1.585106,-2.845827 2.456548,-2.684961 4.7901069,0.884272 0.828238,1.266812 1.754466,2.585242 2.058285,2.929777 0.303841,0.344497 0.467718,0.626486 0.364231,0.626486 -0.103526,0 0.06947,0.498254 0.384357,1.10727 0.314928,0.608977 0.51395,1.165807 0.442345,1.237429 -0.07159,0.07147 -2.48798,0.24164 -5.3697209,0.377775 l -5.2395192,0.24769 z"
+                id="path51" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 4.5080584,42.568009 c 0.1400394,-0.572599 0.4733682,-1.670339 0.7407864,-2.439426 0.2674031,-0.76905 0.4136329,-1.470902 0.3249173,-1.559616 -0.088731,-0.08849 0.00224,-0.345632 0.2020942,-0.570633 0.1998618,-0.225001 0.7137018,-1.038256 1.1418646,-1.806965 1.5832973,-2.842575 2.4365543,-2.686209 4.8249591,0.884272 0.847411,1.266812 1.772069,2.585242 2.054789,2.929777 0.282727,0.344497 0.430932,0.626486 0.329382,0.626486 -0.101596,0 0.07295,0.498254 0.387861,1.10727 0.314928,0.608977 0.503227,1.176547 0.418511,1.261253 -0.08472,0.08471 -2.522307,0.256388 -5.4168789,0.381367 L 4.25349,43.609064 Z"
+                id="path53" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 4.2955586,43.45992 c 0,-0.07979 0.3108036,-1.232249 0.6906621,-2.560662 0.3798622,-1.328413 0.6263408,-2.415262 0.5477317,-2.415262 -0.1373151,0 0.984132,-1.806436 2.1668922,-3.490426 1.123566,-1.599701 2.089074,-0.996736 4.7292364,2.953411 0.789594,1.181387 1.453705,2.270468 1.475802,2.420178 0.02195,0.149749 0.296955,0.768823 0.61077,1.375758 0.313831,0.606898 0.495186,1.178892 0.403024,1.271048 -0.208679,0.20874 -10.6241184,0.645847 -10.6241184,0.445955 z"
+                id="path55" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 4.2982981,43.27992 c 0.0015,-0.176598 0.3061117,-1.318657 0.67687,-2.537898 0.3707773,-1.21924 0.6291484,-2.266384 0.5741656,-2.326926 -0.054979,-0.0605 0.4900549,-0.994693 1.2112108,-2.075832 1.3747668,-2.061084 2.2054456,-2.521901 3.1430706,-1.7437 0.5895239,0.489292 4.0827009,5.531279 4.0571939,5.856037 -0.0079,0.103236 0.242014,0.684381 0.555844,1.291316 0.313831,0.606898 0.488644,1.185434 0.388478,1.285607 -0.336609,0.336556 -10.6096367,0.580124 -10.6068329,0.251471 z"
+                id="path57" />
+              <path style="fill:#b3b3b3;stroke-width:2.85714" d="" id="path59" transform="scale(0.26458333)" />
+              <path style="fill:#b3b3b3;stroke-width:2.85714" d="" id="path61" transform="scale(0.26458333)" />
+              <path style="fill:#b3b3b3;stroke-width:2.85714" d="" id="path63" transform="scale(0.26458333)" />
+              <path style="fill:#b3b3b3;stroke-width:0.0946357"
+                d="m 27.687976,42.872082 c -3.313933,-0.136513 -3.156745,0.03819 -3.575664,-3.970076 l -0.220105,-2.106084 1.172975,-0.408935 c 1.679645,-0.585569 3.250864,-0.506347 5.047732,0.254497 0.861763,0.364917 2.789294,1.096757 4.283403,1.626246 3.052962,1.082009 4.845889,2.425359 5.18596,3.885597 l 0.229262,0.984483 -4.602838,-0.07298 c -2.531563,-0.04008 -5.915883,-0.127059 -7.520725,-0.192858 z"
+                id="path65" />
+            </g>
+
+          </g>
+
+          <!--add your highscore table here-->
+          <g id="highscoretable" transform="translate(40,40)" style="visibility: hidden">
+            <rect width="520" height="480" style="fill:white;stroke:red;stroke-width:2" />
+            <text x="260" y="40" style="fill:red;font-size:30px;font-weight:bold;text-anchor:middle">
+              High Score Table
+            </text>
+            <text id="highscoretext" y="45" style="font-size: 20px;font-weight:bold" />
+            
+            <g id="startAgainButton" onclick="startAgain();" onmouseover="" style="cursor: pointer;">
+              <rect x="230" y="317" width="100" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+              <text x="230" y="350">Start again?</text>
+            </g>      
+            <g  onclick="startAgainWithSeed();" onmouseover="" style="cursor: pointer;">
+              <rect x="360" y="317" width="200" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+              <text x="380" y="350">Start again with seed?</text>
+            </g>      
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</body>
+
+</html>
