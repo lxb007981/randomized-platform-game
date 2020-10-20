@@ -1,0 +1,23 @@
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!game.js
+!game.html
+!highscore.js
+!seedrandom.js
+# etc...
+
+# ...even if they are in subdirectories
+!*/
+
+# if the files to be tracked are in subdirectories
+!sound/celebrate.ooog
+!sound/gameOver.mp3
+!sound/gateOpen.wav
+!sound/goodThing.mp3
+!sound/mainTheme.mp3
+!sound/monsterHit.wav
+!sound/shoot.wav
+!sound/welcomeScreen.mp3
