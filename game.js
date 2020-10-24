@@ -181,6 +181,19 @@ class Monster {
             let platformSize = new Size(platformW, platformH);
 
             if (intersect(monsterPos, MONSTER_SIZE, platformPos, platformSize)) {
+                let newX = null;
+                if (monsterPos.x + MONSTER_SIZE.w / 2 > platformPos.x + platformSize.w / 2) {
+                    newX = platformPos.x + platformSize.w + 1;
+                }
+                else {
+                    newX = platformPos.x - MONSTER_SIZE.w - 1;
+                }
+                let transformString = "translate(" + newX + "," + monsterPos.y + ")";
+                this.node.setAttribute("transform", transformString);
+                this.position = new Point(newX, monsterPos.y);
+                if (this.motion == motionType.LEFT) {
+                    transformString += "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
+                }
                 return true;
             }
         }
@@ -300,7 +313,7 @@ var currentSeedNodeSet = null;
 var startAgainFlag = false;
 var playEndingMusicTimeout = null;
 
-var seed = Math.floor(Math.random()*10000000000000).toString();
+var seed = Math.floor(Math.random() * 10000000000000).toString();
 
 function setSeedAndStart(evt) {
     while (true) {
@@ -381,7 +394,7 @@ function startAgain(randomStart) {
     }
     let loadingScreen = svgdoc.getElementById("loadingScreen");
     loadingScreen.setAttribute("style", "visibility: visible");
-    if(randomStart){
+    if (randomStart) {
         Math.seedrandom(new Date().toLocaleTimeString());
         seed = Math.random().toString();
     }
@@ -428,7 +441,6 @@ function regeneratePlatforms() {
     platforms.innerHTML = '';
     platformClass = [];
     createPlatform(new Point(0, 540), 600);
-    
     let numOfPlatform = Math.max(Math.floor(Math.random() * MAX_NUM_OF_PLATFORMS), 8);
     for (let index = 0; index < numOfPlatform; index++) {
         let returnOfFind = findPlatformPosition();
@@ -469,7 +481,7 @@ function loadGameFinish() {
     goodThingNodeSet.innerHTML = '';
     currentSeedNodeSet.innerHTML = "Seed: " + seed;
     function levelUp(levelNodeTrim) {
-        return levelNodeTrim.slice(0, 6) + (parseInt(levelNodeTrim[6]) + 1);
+        return levelNodeTrim.slice(0, 6) + (parseInt(levelNodeTrim.slice(6)) + 1);
     }
     currentLevelNodeSet.innerHTML = levelUp(currentLevelNodeSet.innerHTML.trim());
     //scoreNodeSet.innerHTML=score;
@@ -638,6 +650,62 @@ function loadGameFinish() {
         let regionOfMovement = new Point(x_start, x_end);
         return [objectPos, regionOfMovement];
     }
+
+    // create a portal pair
+    for (let index = 0; index < 2; index++) {
+        let portalReturn = null;
+        while (true) {
+            let found = false;
+            portalReturn = findObjectPos(PORTAL_SIZE);
+            if (portalReturn != null) {
+                found = true;
+                let portalPos = portalReturn[0];
+                let regionOfMovement = portalReturn[1];
+
+                if (portalPos.x + PORTAL_SIZE.w + MONSTER_SIZE.w > regionOfMovement.y || portalPos.x - MONSTER_SIZE.w < regionOfMovement.x) {
+                    found = false;
+                }
+                if (found) {
+                    let possibleMonsterPos1 = new Point(portalPos.x + PORTAL_SIZE.w, portalPos.y + PORTAL_SIZE.h - MONSTER_SIZE.h);
+                    let possibleMonsterPos2 = new Point(portalPos.x - MONSTER_SIZE.w, portalPos.y + PORTAL_SIZE.h - MONSTER_SIZE.h);
+                    for (let i = 0; i < platformClass.length; i++) {
+                        let platform = platformClass[i];
+                        if (intersect(platform.position, new Size(platform.width, 20), possibleMonsterPos1, MONSTER_SIZE) || intersect(platform.position, new Size(platform.width, 20), possibleMonsterPos2, MONSTER_SIZE)) {
+                            found = false;
+                            break;
+                        }
+                    }
+                }
+                if (found) {
+                    for (let index = 0; index < portalPair.length; index++) {
+                        const item = portalPair[index];
+                        if (intersect(item.position, PORTAL_SIZE, portalPos, PORTAL_SIZE)) {
+                            found = false;
+                            break;
+                        }
+                    }
+                }
+                if (found)
+                    break;
+            }
+        }
+
+        let portalPos = portalReturn[0];
+        let regionOfMovement = portalReturn[1];
+        let faceRight = null;
+        if (Math.random() > 0.5) {
+            faceRight = true;
+        }
+        else {
+            faceRight = false;
+        }
+
+        createPortal(portalPos.x, portalPos.y, faceRight);
+        let portal = new Portal(portalPos, regionOfMovement, faceRight);
+        portalPair.push(portal);
+    }
+
+
     // Create the monsters
 
     for (let index = 0; index < NUM_ALL_MONSTERS; index++) {
@@ -653,6 +721,14 @@ function loadGameFinish() {
                     if (intersect(item.position, MONSTER_SIZE, monsterPos, MONSTER_SIZE)) {
                         found = false;
                         break;
+                    }
+                }
+                if (found) {
+                    for (let index = 0; index < 2; index++) {
+                        let portal = portalPair[index];
+                        if (portal.faceRight && portal.position.x + PORTAL_SIZE.w + 2 * MONSTER_SIZE.w > portal.regionOfMovement.y || !portal.faceRight && portal.position.x - 2 * MONSTER_SIZE.w < portal.regionOfMovement.x) {
+                            fount = false;
+                        }
                     }
                 }
                 if (found)
@@ -685,48 +761,6 @@ function loadGameFinish() {
     }
 
 
-    // create a portal pair
-    for (let index = 0; index < 2; index++) {
-        let portalReturn = null;
-        while (true) {
-            let found = false;
-            portalReturn = findObjectPos(PORTAL_SIZE);
-            if (portalReturn != null) {
-                found = true;
-                let portalPos = portalReturn[0];
-                let regionOfMovement = portalReturn[1];
-
-                if (portalPos.x + PORTAL_SIZE.w + MONSTER_SIZE.w > regionOfMovement.y || portalPos.x - MONSTER_SIZE.w < regionOfMovement.x) {
-                    found = false;
-                }
-                if (found) {
-                    for (let index = 0; index < portalPair.length; index++) {
-                        const item = portalPair[index];
-                        if (intersect(item.position, PORTAL_SIZE, portalPos, PORTAL_SIZE)) {
-                            found = false;
-                            break;
-                        }
-                    }
-                }
-                if (found)
-                    break;
-            }
-        }
-
-        let portalPos = portalReturn[0];
-        let regionOfMovement = portalReturn[1];
-        let faceRight = null;
-        if (Math.random() > 0.5) {
-            faceRight = true;
-        }
-        else {
-            faceRight = false;
-        }
-
-        createPortal(portalPos.x, portalPos.y, faceRight);
-        let portal = new Portal(portalPos, regionOfMovement, faceRight);
-        portalPair.push(portal);
-    }
 
     // create a exit gate
     let gateReturn = null;
@@ -792,7 +826,9 @@ function loadGameFinish() {
 
     // Start the game interval
     gameInterval = setInterval("gamePlay()", GAME_INTERVAL);
-    timeInterval = setInterval("updateTime()", 1000);
+    if (!superCheatEnabled) {
+        timeInterval = setInterval("updateTime()", 1000);
+    }
 
 }
 function nextLevel() {
@@ -961,6 +997,9 @@ function keydown(evt) {
         case "P".charCodeAt(0):
             superCheatEnabled = true;
             cheatEnabled = true;
+            break;
+        case "T".charCodeAt(0):
+            nextLevel();
             break;
         case "V".charCodeAt(0):
             cheatEnabled = false;
@@ -1188,7 +1227,7 @@ function collisionDetection() {
         }
     }
 
-    if (!cheatEnabled && monsterBullet!=null&&monsterBullet.exsistence) {
+    if (!cheatEnabled && monsterBullet != null && monsterBullet.exsistence) {
         let monsterBulletNode = monsterBullet.node;
         let monsterBulletX = parseInt(monsterBulletNode.getAttribute("x"));
         let monsterBulletY = parseInt(monsterBulletNode.getAttribute("y"));
@@ -1327,7 +1366,6 @@ function moveMonsters() {
             if (newX < item.regionOfMovement.y && !item.isMonsterCollidePlatform(new Point(newX, y)) && !item.isMonsterCollideMonster(new Point(newX, y))) {
                 transformString = "translate(" + newX + "," + y + ")";
                 node.setAttribute("transform", transformString);
-                //node.setAttribute("x", newX);
                 item.position = new Point(newX, y);
             }
             else {
