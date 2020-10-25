@@ -441,7 +441,7 @@ function regeneratePlatforms() {
     platforms.innerHTML = '';
     platformClass = [];
     createPlatform(new Point(0, 540), 600);
-    let numOfPlatform = Math.max(Math.floor(Math.random() * MAX_NUM_OF_PLATFORMS), 8);
+    let numOfPlatform = Math.max(Math.floor(Math.random() * MAX_NUM_OF_PLATFORMS), 6);
     for (let index = 0; index < numOfPlatform; index++) {
         let returnOfFind = findPlatformPosition();
         createPlatform(returnOfFind[0], returnOfFind[1]);
@@ -833,7 +833,10 @@ function loadGameFinish() {
 }
 function nextLevel() {
     startAgainFlag = false;
-
+    let timeNode = remainingTimeNodeSet;
+    let remainingTime = parseInt(timeNode.innerHTML);
+    score += remainingTime;
+    scoreNodeSet.firstChild.data = score;
     clearInterval(timeInterval);
     clearInterval(gameInterval);
     platforms.removeChild(verticalPlatform.node);
@@ -970,9 +973,9 @@ function keydown(evt) {
 
         case "W".charCodeAt(0):
             if (!superCheatEnabled) {
-                //if (player.isOnPlatform()) {
-                player.verticalSpeed = JUMP_SPEED;
-                //}
+                if (player.isOnPlatform()) {
+                    player.verticalSpeed = JUMP_SPEED;
+                }
             }
             else {
                 player.verticalSpeed = -MOVE_DISPLACEMENT;
@@ -997,6 +1000,10 @@ function keydown(evt) {
         case "P".charCodeAt(0):
             superCheatEnabled = true;
             cheatEnabled = true;
+            if (timeInterval) {
+                clearInterval(timeInterval);
+                timeInterval = null;
+            }
             break;
         case "T".charCodeAt(0):
             nextLevel();
@@ -1004,6 +1011,9 @@ function keydown(evt) {
         case "V".charCodeAt(0):
             cheatEnabled = false;
             superCheatEnabled = false;
+            if (timeInterval == null) {
+                timeInterval = setInterval("updateTime()", 1000);
+            }
             break;
     }
 }
@@ -1105,7 +1115,7 @@ function resolveMonsterCollision() {
 //
 function collisionDetection() {
     // check portals and monsters
-    let monsterTeleported = false;
+    //let monsterTeleported = false;
     for (let i = 0; i < portalPair.length; i++) {
         let portal = portalPair[i];
         let portalPos = portal.position;
@@ -1114,32 +1124,77 @@ function collisionDetection() {
             let monsterPos = monster.position;
             let canEnterPortal = ((monster.motion == motionType.RIGHT) == !portal.faceRight) || ((monster.motion == motionType.LEFT) == portal.faceRight);
             if (canEnterPortal && intersect(portalPos, PORTAL_SIZE, monsterPos, MONSTER_SIZE)) {
-                monsterTeleported = true;
+                //monsterTeleported = true;
                 newPortal = portalPair[1 - i];
                 let newPortalPos = newPortal.position;
-                monster.regionOfMovement = newPortal.regionOfMovement;
+                let noCollisionWillHappen = true;
                 if (newPortal.faceRight) {
-                    monster.motion = motionType.RIGHT;
                     let monsterNewX = (newPortalPos.x + PORTAL_SIZE.w + 1);
                     let monsterNewY = (newPortalPos.y + PORTAL_SIZE.h - MONSTER_SIZE.h);
-                    monster.position = new Point(monsterNewX, monsterNewY);
-                    let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")";
-                    monster.node.setAttribute("transform", transformString);
+                    let newMonsterPos = new Point(monsterNewX, monsterNewY);
+                    for (let k = 0; k < monsterClass.length; k++) {
+                        if (k == j)
+                            continue;
+                        let anotherMonster = monsterClass[k];
+                        let anotherMonsterPos = anotherMonster.position;
+                        if (intersect(newMonsterPos, MONSTER_SIZE, anotherMonsterPos, MONSTER_SIZE)) {
+                            noCollisionWillHappen = false;
+                            break;
+                        }
+                    }
+                    if (noCollisionWillHappen) {
+                        monster.motion = motionType.RIGHT;
+                        monster.regionOfMovement = newPortal.regionOfMovement;
+                        monster.position = newMonsterPos;
+                        let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")";
+                        monster.node.setAttribute("transform", transformString);
+                    }
+                    else {
+                        let transformString = "translate(" + monster.position.x + "," + monster.position.y + ")";
+                        if (!portal.faceRight) {
+                            transformString += "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
+                        }
+                        monster.node.setAttribute("transform", transformString);
+                        monster.motion = 2 / monster.motion;
+                    }
                 }
                 else {
-                    monster.motion = motionType.LEFT;
                     let monsterNewX = (newPortalPos.x - MONSTER_SIZE.w - 1);
                     let monsterNewY = (newPortalPos.y + PORTAL_SIZE.h - MONSTER_SIZE.h);
-                    monster.position = new Point(monsterNewX, monsterNewY);
-                    let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")" + "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
-                    monster.node.setAttribute("transform", transformString);
+                    let newMonsterPos = new Point(monsterNewX, monsterNewY);
+                    for (let k = 0; k < monsterClass.length; k++) {
+                        if (k == j)
+                            continue;
+                        let anotherMonster = monsterClass[k];
+                        let anotherMonsterPos = anotherMonster.position;
+                        if (intersect(newMonsterPos, MONSTER_SIZE, anotherMonsterPos, MONSTER_SIZE)) {
+                            noCollisionWillHappen = false;
+                            break;
+                        }
+                    }
+                    if (noCollisionWillHappen) {
+                        monster.motion = motionType.LEFT;
+                        monster.regionOfMovement = newPortal.regionOfMovement;
+                        monster.position = newMonsterPos;
+                        let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")" + "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
+                        monster.node.setAttribute("transform", transformString);
+                    }
+                    else {
+                        let transformString = "translate(" + monster.position.x + "," + monster.position.y + ")";
+                        if (!portal.faceRight) {
+                            transformString += "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
+                        }
+                        monster.node.setAttribute("transform", transformString);
+                        monster.motion = 2 / monster.motion;
+                    }
+
                 }
             }
         }
     }
-    if (monsterTeleported) {
-        resolveMonsterCollision();
-    }
+    //if (monsterTeleported) {
+    //     resolveMonsterCollision();
+    //}
 
     // check portals and bullets
     for (let i = 0; i < portalPair.length; i++) {
