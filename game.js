@@ -317,7 +317,7 @@ var seed = Math.floor(Math.random() * 10000000000000).toString();
 
 function setSeedAndStart(evt) {
     while (true) {
-        seed = prompt("Please enter your seed", "");
+        seed = prompt("Please enter your seed (any string)", "");
         if (seed != null && seed != "") {
             break;
         }
@@ -370,7 +370,7 @@ function introductionScreenLoad() {
 }
 function startAgainWithSeed() {
     while (true) {
-        seed = prompt("Please enter your seed", "");
+        seed = prompt("Please enter your seed (any string)", "");
         if (seed != null && seed != "") {
             break;
         }
