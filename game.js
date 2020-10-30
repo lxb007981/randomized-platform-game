@@ -452,7 +452,7 @@ function regeneratePlatforms() {
 }
 function loadGameFinish() {
 
-
+    canShoot = true;
     player = null;                          // The player object
     gameInterval = null;                    // The interval
     timeInterval = null;                    // The interval
@@ -587,7 +587,7 @@ function loadGameFinish() {
             let movementPos = new Point(returnOfFind[0].x, returnOfFind[0].y - range);
             let sizeOfMovement = new Size(returnOfFind[1], range + 20);
             let platformMonsterPos = new Point(platform.position.x, platform.position.y - MONSTER_SIZE.h);
-            let platformMonsterSize = new Size(platform.width, 20);
+            let platformMonsterSize = new Size(platform.width, 20 + MONSTER_SIZE.h);
             if (intersect(movementPos, sizeOfMovement, platformMonsterPos, platformMonsterSize)) {
                 found = false;
                 break;
@@ -1054,6 +1054,7 @@ function keyup(evt) {
 function endGame() {
     gameMusic.pause();
     gameOverSound.play()
+    canShoot = false;
     // Clear the game interval
     clearInterval(timeInterval);
     clearInterval(gameInterval);
