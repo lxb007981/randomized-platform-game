@@ -392,6 +392,9 @@ function startAgain(randomStart) {
     for (let i = 0; i < disappearingPlatformClass.length; i++) {
         platforms.removeChild(disappearingPlatformClass[i].node);
     }
+    let gameScreen = svgdoc.getElementById("gameScreen");
+    gameScreen.setAttribute("style", "visibility: hidden");
+
     let loadingScreen = svgdoc.getElementById("loadingScreen");
     loadingScreen.setAttribute("style", "visibility: visible");
     if (randomStart) {
@@ -583,7 +586,9 @@ function loadGameFinish() {
             let platform = platformClass[i];
             let movementPos = new Point(returnOfFind[0].x, returnOfFind[0].y - range);
             let sizeOfMovement = new Size(returnOfFind[1], range + 20);
-            if (intersect(movementPos, sizeOfMovement, platform.position, new Size(platform.width, 20))) {
+            let platformMonsterPos = new Point(platform.position.x, platform.position.y - MONSTER_SIZE.h);
+            let platformMonsterSize = new Size(platform.width, 20);
+            if (intersect(movementPos, sizeOfMovement, platformMonsterPos, platformMonsterSize)) {
                 found = false;
                 break;
             }
@@ -973,7 +978,7 @@ function keydown(evt) {
 
         case "W".charCodeAt(0):
             if (!superCheatEnabled) {
-                if (player.isOnPlatform()) {
+                if (cheatEnabled || player.isOnPlatform()) {
                     player.verticalSpeed = JUMP_SPEED;
                 }
             }
