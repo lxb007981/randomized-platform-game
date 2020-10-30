@@ -431,7 +431,7 @@ function createPlatform(position, width) {
     platformNode.setAttribute("y", position.y);
     platformNode.setAttribute("width", width);
     platformNode.setAttribute("height", 20);
-    platformNode.setAttribute("fill", "orange");
+    platformNode.setAttribute("fill", "#fbb93cff");
     platforms.appendChild(platformNode);
     let platformSize = new Size(width, 20);
     let platform = new Platform(platformNode, position, platformSize);
@@ -1149,14 +1149,14 @@ function collisionDetection() {
                         let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")";
                         monster.node.setAttribute("transform", transformString);
                     }
-                    else {
+                    /*else {
                         let transformString = "translate(" + monster.position.x + "," + monster.position.y + ")";
                         if (!portal.faceRight) {
                             transformString += "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
                         }
                         monster.node.setAttribute("transform", transformString);
                         monster.motion = 2 / monster.motion;
-                    }
+                    }*/
                 }
                 else {
                     let monsterNewX = (newPortalPos.x - MONSTER_SIZE.w - 1);
@@ -1179,14 +1179,14 @@ function collisionDetection() {
                         let transformString = "translate(" + monsterNewX + "," + monsterNewY + ")" + "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
                         monster.node.setAttribute("transform", transformString);
                     }
-                    else {
+                    /*else {
                         let transformString = "translate(" + monster.position.x + "," + monster.position.y + ")";
                         if (!portal.faceRight) {
                             transformString += "translate(" + MONSTER_SIZE.w + ", 0) scale(-1, 1)";
                         }
                         monster.node.setAttribute("transform", transformString);
                         monster.motion = 2 / monster.motion;
-                    }
+                    }*/
 
                 }
             }
