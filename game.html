@@ -232,8 +232,11 @@
       </audio>
     </foreignObject>
     <g id="introductionScreen" style="visibility: hidden">
-
-      <foreignObject x="50" y="0" width="700" height="800">
+      <g id="startButton" onclick="introductionScreenLoad(evt);" onmouseover="" style="cursor: pointer;">
+        <rect x="300" y="540" width="100" height="50" style="fill:red;stroke:orange;stroke-width:5" />
+        <text x="326" y="572">START</text>
+      </g>
+      <foreignObject x="25" y="70" width="700" height="524" transform="rotate(350)">
 
         <body xmlns="http://www.w3.org/1999/xhtml">
           <p style="color:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
@@ -247,11 +250,11 @@
               style="color: red;">hearts</span> randomly distributed in the
             world. You must collect all the red hearts before you can enter the <span style="color: red;">next
               level</span>. Press <span style="color: red;">H</span> to shoot bullets and kill monsters. You only have
-            <span style="color: red;">8</span> bullets so cherish every bullet you've got. If you are a black sheep,
+            <span style="color: red;">8</span> bullets so cherish every bullet you've got. Tell you a secret,
             press
             <span style="color: red;">C</span> to enable the cheat mode. But remember,
           </p>
-          <h1>Don't Press P!</h1>
+          <h1 style="font-size: 40px;">Don't Press P!</h1>
         </body>
       </foreignObject>
       <g transform="translate(0,200)">
@@ -313,10 +316,7 @@
         <circle cx="46" cy="223" r="1" style="fill:pink" />
       </g>
 
-      <g id="startButton" onclick="introductionScreenLoad(evt);" onmouseover="" style="cursor: pointer;">
-        <rect x="300" y="540" width="100" height="50" style="fill:red;stroke:orange;stroke-width:5" />
-        <text x="326" y="572">START</text>
-      </g>
+      
 
     </g>
     <g id="loadingScreen" style="visibility: hidden">
