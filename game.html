@@ -240,19 +240,22 @@
 
         <body xmlns="http://www.w3.org/1999/xhtml">
           <p style="color:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
-            Look at this <span style="color: red;">poor jumpy guy</span>! See, he can run,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; he can jump, he can even
+            Look at this <span style="color: red;">poor jumpy guy</span>! See, he can
+            run,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; he can jump, he can even
             shoot bullets and kill monsters! The game map of each
             level is <span style="color: red;">randomly</span> generated, however, you could
-            decide whether to start the game with a random <span style="color: red;">seed</span> so that the game world is
+            decide whether to start the game with a random <span style="color: red;">seed</span> so that the game world
+            is
             fixed. Press <span style="color: red;">A</span> to move left and press <span style="color: red;">D</span> to
             move right. Press <span style="color: red;">W</span> to jump if you are on a platform. Press <span
               style="color: red;">S</span> to fall fast. There are <span style="color: red;">monsters</span> and <span
               style="color: red;">hearts</span> randomly distributed in the
             world. You must collect all the red hearts before you can enter the <span style="color: red;">next
               level</span>. Press <span style="color: red;">H</span> to shoot bullets and kill monsters. You only have
-            <span style="color: red;">8</span> bullets so cherish every bullet you've got. Tell you a secret,
+            <span style="color: red;">8</span> bullets so cherish every bullet you've got.
             press
-            <span style="color: red;">C</span> to enable the cheat mode. But remember,
+            <span style="color: red;">C</span> to enable the cheat mode and <span style="color: red;">V</span> to exit.
+            But remember,
           </p>
           <h1 style="font-size: 40px;">Don't Press P!</h1>
         </body>
@@ -316,7 +319,7 @@
         <circle cx="46" cy="223" r="1" style="fill:pink" />
       </g>
 
-      
+
 
     </g>
     <g id="loadingScreen" style="visibility: hidden">
@@ -354,15 +357,30 @@
       <rect x="20" y="20" width="600" height="560" style="fill:black;stroke:red;stroke-width:5" />
 
 
-      <!--add your score element here-->
-      <g transform="translate(640, 120)">
+      <g transform="translate(640, 50)">
+        <text x="70" y="0" style="fill:#01080c;font-size:30px;font-weight:bold;text-anchor:middle">
+          Don't 
+        </text>
+      </g>
+      <g transform="translate(640, 90)">
+        <text x="70" y="0" style="fill:#01080c;font-size:30px;font-weight:bold;text-anchor:middle">
+          Press
+        </text>
+      </g>
+      <g transform="translate(640, 154)">
+        <text x="70" y="0" style="fill:#01080c;font-size:60px;font-weight:bold;text-anchor:middle">
+          P!
+        </text>
+      </g>
+
+      <g transform="translate(640, 200)">
         <text x="70" y="0" style="fill:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
           Score:
         </text>
         <rect x="0" y="10" width="140" height="35" style="fill:white" />
         <text id="score" x="70" y="36" style="fill:#66ccff;font-size:25px;text-anchor:middle">0</text>
       </g>
-      <g transform="translate(640, 220)">
+      <g transform="translate(640, 280)">
         <text x="70" y="0" style="fill:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
           Bullets:
         </text>
@@ -378,23 +396,25 @@
           <use xlink:href="#bullet" x="100" y="20" />
         </g>
       </g>
-      <g transform="translate(640, 320)">
+      <g transform="translate(640, 370)">
         <text x="70" y="0" style="fill:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
           Time:
         </text>
         <rect x="0" y="10" width="140" height="35" style="fill:white" />
         <text id="remainingTime" x="70" y="36" style="fill:#66ccff;font-size:25px;text-anchor:middle">120</text>
       </g>
-      <g transform="translate(640, 420)">
+      <g transform="translate(640, 470)">
         <text id="currentLevel" x="70" y="0" style="fill:#66ccff;font-size:25px;font-weight:bold;text-anchor:middle">
           Level:0
         </text>
       </g>
-      <g transform="translate(640, 470)">
+      <g transform="translate(640, 520)">
         <text id="currentSeed" x="70" y="0" style="fill:#66ccff;font-size:7px;font-weight:bold;text-anchor:middle">
 
         </text>
       </g>
+
+
 
 
       <g style="clip-path:url(#gameareaclip)">
