@@ -329,6 +329,7 @@ function setSeedAndStart(evt) {
 // The load functions
 //
 function welcomeScreenLoad(event) {
+    Math.seedrandom(seed);
     svgdoc = event.target.ownerDocument;
     let welcomeMusic = document.getElementById("welcomeMusic");
     welcomeMusic.volume = 0.5;
