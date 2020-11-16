@@ -261,6 +261,7 @@ var SHOOT_INTERVAL = 200.0;                 // The period when shooting is disab
 var MONSTER_SHOOT_INTERVAL = 2000.0;
 var canShoot = true;                        // A flag indicating whether the player can shoot a bullet
 var NUM_ALL_MONSTERS = 7;
+var NUM_MOST_MONSTERS = 15;
 var MONSTER_SIZE = new Size(40, 40);        // The speed of a bullet
 var NUM_GOOD_THING = 8;
 var GOOD_THING_SIZE = new Size(30, 30);
@@ -712,8 +713,12 @@ function loadGameFinish() {
 
 
     // Create the monsters
-
-    for (let index = 0; index < NUM_ALL_MONSTERS; index++) {
+    let numLevel = parseInt(currentLevelNodeSet.innerHTML.trim().slice(6));
+    let totalNumOfMonsters = NUM_ALL_MONSTERS + (numLevel - 1) * 4;
+    if (totalNumOfMonsters > NUM_MOST_MONSTERS) {
+        totalNumOfMonsters = NUM_MOST_MONSTERS;
+    }
+    for (let index = 0; index < totalNumOfMonsters; index++) {
         let monsterReturn = null;
         while (true) {
             let found = false;
@@ -754,13 +759,14 @@ function loadGameFinish() {
             motion = motionType.RIGHT;
         }
         let monster = null;
-        if (index < NUM_ALL_MONSTERS - 1) {
-            let monsterNode = createMonster(0, 0, false);
-            monster = new Monster(monsterNode, monsterPos, motion, regionOfMovement);
-        } else {
+        if (index == NUM_ALL_MONSTERS - 1) {
             let monsterKingNode = createMonster(0, 0, true);
             monster = new MonsterKing(monsterKingNode, monsterPos, motion, regionOfMovement);
             monsterKing = monster;
+
+        } else {
+            let monsterNode = createMonster(0, 0, false);
+            monster = new Monster(monsterNode, monsterPos, motion, regionOfMovement);
         }
         monsterClass.push(monster);
     }
@@ -841,6 +847,8 @@ function nextLevel() {
     let timeNode = remainingTimeNodeSet;
     let remainingTime = parseInt(timeNode.innerHTML);
     score += remainingTime;
+    let numLevel = parseInt(currentLevelNodeSet.innerHTML.trim().slice(6));
+    score += numLevel * 100;
     scoreNodeSet.firstChild.data = score;
     clearInterval(timeInterval);
     clearInterval(gameInterval);
