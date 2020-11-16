@@ -46,9 +46,9 @@ function isOnParticularPlatform(playerX, playerY, platformX, platformY, platform
 }
 // The player class used in this program
 class Player {
-    constructor() {
+    constructor(playerPos) {
         this.node = document.getElementById("player");
-        this.position = PLAYER_INIT_POS;
+        this.position = playerPos;
         this.motion = motionType.NONE;
         this.verticalSpeed = 0;
         this.faceRight = true;
@@ -245,7 +245,6 @@ class MonsterKing extends Monster {
 var score = 0;                              // The score of the game
 var PLAYER_SIZE = new Size(40, 44);         // The size of the player
 var SCREEN_SIZE = new Size(600, 560);       // The size of the game screen
-var PLAYER_INIT_POS = new Point(0, 420);   // The initial position of the player
 
 var MOVE_DISPLACEMENT = 5;                  // The speed of the player in motion
 var MONSTER_SPEED = 1;
@@ -401,7 +400,7 @@ function startAgain(randomStart) {
     loadingScreen.setAttribute("style", "visibility: visible");
     if (randomStart) {
         Math.seedrandom(new Date().toLocaleTimeString());
-        seed = Math.random().toString();
+        seed = Math.floor(Math.random() * 10000000000000).toString();
     }
     Math.seedrandom(seed);
     regeneratePlatforms();
@@ -589,7 +588,8 @@ function loadGameFinish() {
             let movementPos = new Point(returnOfFind[0].x, returnOfFind[0].y - range);
             let sizeOfMovement = new Size(returnOfFind[1], range + 20);
             let platformMonsterPos = new Point(platform.position.x, platform.position.y - MONSTER_SIZE.h);
-            let platformMonsterSize = new Size(platform.width, 20 + MONSTER_SIZE.h);
+            let platformMonsterSize = new Size(platform.width, 20 + MONSTER_SIZE.h + PLAYER_SIZE.h);
+            // to not collide with monster and player
             if (intersect(movementPos, sizeOfMovement, platformMonsterPos, platformMonsterSize)) {
                 found = false;
                 break;
@@ -600,12 +600,6 @@ function loadGameFinish() {
             break;
         }
     }
-    //createVerticalPlatform(new Point(550, 260), 50,);
-
-    // Create the player
-    player = new Player();
-
-    nameBox.node.firstElementChild.innerHTML = nameBox.playerName;
 
     function findObjectPos(objectSize) {
         let possiblePositions = [];
@@ -657,6 +651,20 @@ function loadGameFinish() {
         let regionOfMovement = new Point(x_start, x_end);
         return [objectPos, regionOfMovement];
     }
+
+
+    // Create the player
+    let playerReturn = null;
+    while (true) {
+        playerReturn = findObjectPos(PLAYER_SIZE);
+        if (playerReturn != null) {
+            break;
+        }
+    }
+    let playerPos = playerReturn[0];
+    player = new Player(playerPos);
+    nameBox.node.firstElementChild.innerHTML = nameBox.playerName;
+
 
     // create a portal pair
     for (let index = 0; index < 2; index++) {
@@ -740,6 +748,13 @@ function loadGameFinish() {
                         if (portal.faceRight && portal.position.x + PORTAL_SIZE.w + 2 * MONSTER_SIZE.w > portal.regionOfMovement.y || !portal.faceRight && portal.position.x - 2 * MONSTER_SIZE.w < portal.regionOfMovement.x) {
                             fount = false;
                         }
+                    }
+                }
+                if (found) {
+                    let playerPositionForTestNearMonster = new Point(player.position.x - 30, player.position.y);
+                    let playerSizeForTestNearMonster = new Size(PLAYER_SIZE.w + 60, PLAYER_SIZE.h);
+                    if (intersect(playerPositionForTestNearMonster, playerSizeForTestNearMonster, monsterPos, MONSTER_SIZE)) {
+                        found = false;
                     }
                 }
                 if (found)
